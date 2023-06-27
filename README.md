@@ -6,7 +6,7 @@ This repository contains code examples for different communication protocols bet
 
 The SPI (Serial Peripheral Interface) protocol is commonly used for communication between microcontrollers and peripherals. The SPI folder contains the following examples:
 
-- [SPI_Master.c](./SPI/SPI_Master.c): Arduino code for the master Arduino that sends data via SPI.
+- [SPI_Master.c](./SPI_Master.c): Arduino code for the master Arduino that sends data via SPI.
 - [SPI_Slave.c](./SPI/SPI_Slave.c): Arduino code for the slave Arduino that receives data via SPI.
 
 ## I2C Communication
