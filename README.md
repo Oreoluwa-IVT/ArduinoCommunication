@@ -1,6 +1,6 @@
-# Arduino Communication Examples
+# Board Communication Examples
 
-This repository contains code examples for different communication protocols between two Arduinos.
+This repository contains code examples for different communication protocols between different development board E.g MSP430,arduino ,ESP32.
 
 ## SPI Communication
 
