@@ -1,5 +1,5 @@
 #include<SPI.h>
-char txMsg[] = "Oreoluwa!";
+char txMsg[] = "Oreoluwa";
 char rxMasg[20] = "";
 void setup()
 {
@@ -13,11 +13,13 @@ void setup()
 
 void loop()
 {
-  SPI.transfer('<'); //start mark
+ // SPI.transfer('<'); //start mark
   for(int i=0; i< sizeof(txMsg); i++)
   {
     SPI.transfer(txMsg[i]);//SPI transfer is byte-by-byte
+    Serial.print(txMsg[i]);
   }
-  SPI.transfer('>');  //end mark 
+  Serial.print("\n");
+ // SPI.transfer('>');  //end mark 
   delay(1000);         //test interval
 }
