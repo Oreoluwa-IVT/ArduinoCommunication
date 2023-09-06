@@ -1,7 +1,6 @@
-# Board Communication Examples
+# Board Communication Examples (Arduino Only for now )
 
-This repository contains code examples for different communication protocols between different development board E.g MSP430,arduino ,ESP32.
-
+This repository contains code examples for different communication protocols between different development board E.g MSP430,arduino ,ESP32.majorly 
 ## SPI Communication
 
 The SPI (Serial Peripheral Interface) protocol is commonly used for communication between microcontrollers and peripherals. The SPI folder contains the following examples:
