@@ -4,6 +4,8 @@ This repository contains code examples for different communication protocols bet
 ## SPI Communication
 
 The SPI (Serial Peripheral Interface) protocol is commonly used for communication between microcontrollers and peripherals. The SPI folder contains the following examples:
+#### Result: 
+![image](https://github.com/Oreoluwa-IVT/Board_Communication/assets/75027292/e9ad6ade-d56e-4e75-a466-b28e12abb317)
 
 
 
