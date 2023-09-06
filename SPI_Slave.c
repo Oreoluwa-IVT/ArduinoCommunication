@@ -1,5 +1,5 @@
+//ON ARDUION MEGA 
 #include <SPI.h>
-
 const int slaveSelectPin = 53; // SS pin for the Mega (must match the Uno's SS pin)
 
 void setup() {
