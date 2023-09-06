@@ -1,50 +1,31 @@
-#include<SPI.h>
-char rxMsg[20] = "";
-volatile bool flag1 = false;
-bool flag2 = false;
-int i = 0;
-void setup()
-{
+#include <SPI.h>
+
+const int slaveSelectPin = 53; // SS pin for the Mega (must match the Uno's SS pin)
+
+void setup() {
+  SPI.begin();
+  pinMode(slaveSelectPin, INPUT); // Set SS pin as input to enable SPI Slave mode
   Serial.begin(9600);
-  pinMode(SS, INPUT_PULLUP);  //SPI.h helps to get the meaning of SS
-  pinMode(MOSI, OUTPUT);      //should be made output to send data to Master
-  SPCR |= _BV(SPE);         //SPI Port is enabled
-  SPI.attachInterrupt();    //SPI interrupt is enabled
 }
-void loop()
-{
-  if (flag1 == true)  //SPDR has data
-  {
-    if (flag2 == false) //start mark of message not yet received
-    {
-      char q = SPDR;
-      if (q == '<')
-      {
-        flag2 = true;   //start mark is detected
-        flag1 = false;  //must be made false for the next cycle
-      }
+
+void loop() {
+  if (digitalRead(slaveSelectPin) == LOW) {
+    int messageLength = SPI.transfer(0); // Read the message length
+    delay(10); // Small delay to ensure the message is ready to read
+    String receivedMessage = "";
+    for (int i = 0; i < messageLength; i++) {
+      char c = SPI.transfer(0); // Read each character of the message
+      receivedMessage += c;
+      delay(10); // Small delay between characters
     }
-    else
-    {
-      if (SPDR == '>')  //checking if end mark has arived
-      {
-        flag1 = false;
-        flag2 = false;
-        i = 0;
-        Serial.print(rxMsg);  //end mark has arrived; show the received message
-        Serial.println();     //insert newline
-      }
-      else
-      {
-        rxMsg[i] = SPDR;    //save received charcater/data byte in array
-        i++;                //adjust array pointer
-        flag1 = false;      //must be false for next cycle
-      }
-    }
+    Serial.println("Received message: " + receivedMessage);
+    delay(100); // Add a small delay to avoid repeated processing
   }
 }
-ISR (SPI_STC_vect)   //MCU comes here when there is a data byte in SPDR
-{
-  flag1 = true;   //flag to indicate there is data in the SPDR register
-}
-//Updated on 12/12/2018
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// ADD A DECOUPLING CAPACITOR TO SS INCASE YOU GET GIBERISH. IT WILL STABILIZE THE SS PIN TO LOW" 
+// I TRIED IT AND IT WORKED 
+//////////////////////////////////////////////////////////////////////////////
