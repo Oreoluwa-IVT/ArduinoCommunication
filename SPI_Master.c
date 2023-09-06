@@ -1,25 +1,26 @@
-#include<SPI.h>
-char txMsg[] = "Oreoluwa";
-char rxMasg[20] = "";
-void setup()
-{
-  Serial.begin(9600);
+// ON ARDUINO UNO 
+#include <SPI.h>
+
+const int slaveSelectPin = 10; // SS pin for selecting the slave (can be any digital pin)
+
+void setup() {
   SPI.begin();
-  SPI.setClockDivider(SPI_CLOCK_DIV128); //16 MHz/128
-  pinMode(SS, OUTPUT);    //SS is DPin-10
-  digitalWrite(SS, LOW);   //Slave is selected
+  pinMode(slaveSelectPin, OUTPUT);
+  digitalWrite(slaveSelectPin, HIGH); // Deselect the slave initially
+  Serial.begin(9600);
 }
 
-
-void loop()
-{
- // SPI.transfer('<'); //start mark
-  for(int i=0; i< sizeof(txMsg); i++)
-  {
-    SPI.transfer(txMsg[i]);//SPI transfer is byte-by-byte
-    Serial.print(txMsg[i]);
+void loop() {
+  String message = "Hello, Mega!"; // Message to send
+  digitalWrite(slaveSelectPin, LOW); // Select the slave
+  delay(10); // Small delay to ensure the slave is ready to receive
+  SPI.transfer(message.length()); // Send the message length
+  delay(10); // Small delay to ensure the slave is ready to receive
+  for (char c : message) {
+    SPI.transfer(c); // Send each character of the message
+    delay(10); // Small delay between characters
   }
-  Serial.print("\n");
- // SPI.transfer('>');  //end mark 
-  delay(1000);         //test interval
+  digitalWrite(slaveSelectPin, HIGH); // Deselect the slave
+
+  delay(1000); // Wait for 1 second before sending the next message
 }
