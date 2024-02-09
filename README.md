@@ -9,8 +9,8 @@ The SPI (Serial Peripheral Interface) protocol is commonly used for communicatio
 
 
 
-- [SPI_Master.c](./SPI_Master.c): Arduino code for the master Arduino that sends data via SPI.
-- [SPI_Slave.c](./SPI_Slave.c): Arduino code for the slave Arduino that receives data via SPI.
+- [SPI_Master.c](./SPI_Master.c): Arduino code for the master Arduino that sends a message via SPI.
+- [SPI_Slave.c](./SPI_Slave.c): Arduino code for the slave Arduino that receives a message via SPI.
 
 ## I2C Communication
 
